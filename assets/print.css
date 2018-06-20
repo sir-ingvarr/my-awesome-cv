@@ -1,0 +1,15 @@
+.underlay {
+  color: black;
+  font-family: 'RobotoMono';
+  font-size: 15pt;
+  padding-top: 0;
+  line-height: 24px;
+}
+
+.inner-block {
+  padding-top: 0;
+}
+
+.skills, .experience, .education {
+  line-height: 30px;
+}
