@@ -4,6 +4,7 @@
   font-size: 15pt;
   padding-top: 0;
   line-height: 24px;
+  background: white;
 }
 
 .inner-block {
@@ -12,4 +13,8 @@
 
 .skills, .experience, .education {
   line-height: 30px;
+}
+
+.sub-title {
+  margin-top: 10px;
 }
