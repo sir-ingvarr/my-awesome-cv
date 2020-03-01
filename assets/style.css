@@ -3,6 +3,18 @@
     src: url("RobotoMono-Light.ttf")
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+}
+
+html {
+    background-color: #282828;
+}
+
 :active, :hover, :focus {
     outline: 0;
     outline-offset: 0;
@@ -10,6 +22,7 @@
 
 a {
     text-decoration: none;
+    color: #edeeef;
 }
 
 a:active {
@@ -23,18 +36,19 @@ a:active {
     color: #edeeef;
     font-family: 'RobotoMono';
     font-size: 14pt;
-    padding: 20px;
-    min-width: 1000px;
+    padding: 0;
+    max-width: 1250px;
     justify-content: center;
 }
 .inner-block {
     max-width: 1200px;
-    min-width: 1000px;
     display: flex;
     flex-direction: column;
 }
 
 .upper-block {
+    width: 100%;
+    height: 300px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -70,7 +84,7 @@ img {
     border-left: 1px solid grey;
 }
 
-.position .apply {
+.apply {
     padding-left: 30px;
     margin: 0;
 }
@@ -79,7 +93,7 @@ img {
     font-size: 20pt;
     display: flex;
     flex-direction: row;
-    margin: 3px; 
+    margin: 3px;
 }
 
 ul {
@@ -99,14 +113,13 @@ ul {
 
 hr {
     border: none;
-    height: 2px;
+    height: 3px;
     background-color:#f7612e;
-    width: 100%;
     margin: 20px;
 }
 
 .skills, .experience, .education {
-    padding-left: 40px;
+    padding-left: 30px;
 }
 
 .skills .apply li {
@@ -135,3 +148,8 @@ hr {
     flex-direction: row;
     line-height: 30px;
 }
+
+.company-info {
+    width: 85%;
+}
+

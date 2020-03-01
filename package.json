@@ -1,0 +1,28 @@
+{
+  "name": "igor_berezin-cv",
+  "version": "1.0.0",
+  "description": "this is a layouts set to be converted to pdf as my own cv.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"No test required\" && exit 0",
+    "build": "node src/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sir-ingvarr/my-awesome-cv.git"
+  },
+  "keywords": [
+    "CV",
+    "Node.js",
+    "JavaScript"
+  ],
+  "author": "Igor Berezin (igor.berezin@js-dev.pro)",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/sir-ingvarr/my-awesome-cv/issues"
+  },
+  "homepage": "https://github.com/sir-ingvarr/my-awesome-cv#readme",
+  "devDependencies": {
+    "html-pdf": "^2.2.0"
+  }
+}
