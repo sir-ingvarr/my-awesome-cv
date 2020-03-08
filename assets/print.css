@@ -3,12 +3,20 @@
   font-family: 'RobotoMono';
   font-size: 10pt;
   padding-top: 0;
-  line-height: 24px;
+  line-height: 20px;
   background: white;
 }
 
 html {
   background: white;
+}
+
+.apply {
+  line-height: 22px;
+}
+
+.company-info li{
+  line-height: 22px;
 }
 
 .photo {
@@ -62,7 +70,11 @@ a {
   float: left;
 }
 
+.green, .gold {
+  color: black;
+}
+
 .contacts {
-  text-align: center;
-  margin-left: auto;
+  text-align: left;
+  margin-left: 50px;
 }
