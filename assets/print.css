@@ -7,6 +7,7 @@
   background: white;
 }
 
+
 html {
   background: white;
 }
@@ -26,17 +27,7 @@ html {
 
 .name-photo {
   display: inline-block;
-  margin-left: 70px;
-}
-
-.position {
-  display: inline-block;
-  margin-left: 160px;
-}
-
-.upper-block {
-  width: 100%;
-  height: 250px;
+  margin-left: 0;
 }
 
 a {
@@ -77,4 +68,34 @@ a {
 .contacts {
   text-align: left;
   margin-left: 50px;
+}
+
+@media print {
+  .page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /*@page {*/
+  /*  margin: 12mm 15mm;*/
+  /*}*/
+
+  .inner-block {
+    padding: 0;
+    margin: 0;
+  }
+
+  .underlay {
+    padding: 0;
+    margin: 0;
+  }
+
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    break-after: page;
+    page-break-after: always;
+    padding: 20px 25px;
+  }
 }
