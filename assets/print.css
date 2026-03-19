@@ -3,31 +3,28 @@
   font-family: 'RobotoMono';
   font-size: 10pt;
   padding-top: 0;
-  line-height: 20px;
+  line-height: 1.6;
   background: white;
 }
-
 
 html {
   background: white;
 }
 
-.apply {
-  line-height: 22px;
+.contact-item,
+.role-item,
+.skill-item {
+  line-height: 1.6;
 }
 
-.company-info li{
-  line-height: 22px;
+.company-field,
+.edu-field {
+  line-height: 1.6;
 }
 
 .photo {
   width: 150px;
   height: 150px;
-}
-
-.name-photo {
-  display: inline-block;
-  margin-left: 0;
 }
 
 a {
@@ -42,12 +39,12 @@ a {
   font-size: 14pt;
 }
 
-.inner-block {
-  padding-top: 0;
-}
-
-.skills, .experience, .education {
-  line-height: 30px;
+.skill-item,
+.company-name,
+.company-field,
+.company-close,
+.edu-field {
+  line-height: 1.6;
 }
 
 .sub-title {
@@ -76,15 +73,6 @@ a {
     page-break-before: always;
   }
 
-  /*@page {*/
-  /*  margin: 12mm 15mm;*/
-  /*}*/
-
-  .inner-block {
-    padding: 0;
-    margin: 0;
-  }
-
   .underlay {
     padding: 0;
     margin: 0;
@@ -96,6 +84,6 @@ a {
     justify-content: space-around;
     break-after: page;
     page-break-after: always;
-    padding: 20px 25px;
+    padding: 20mm 10mm 20mm 20mm;
   }
 }

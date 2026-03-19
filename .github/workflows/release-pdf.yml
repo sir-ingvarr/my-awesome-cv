@@ -1,0 +1,87 @@
+name: Release CV PDF
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate PDF
+        run: npm run build
+
+      - name: Retire previous latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if a "latest" release exists
+          if gh release view latest > /dev/null 2>&1; then
+            # Get all existing tags matching vX.Y.Z to determine next patch
+            LATEST_TAG=$(gh release list --json tagName --jq '.[].tagName' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n1)
+
+            if [ -z "$LATEST_TAG" ]; then
+              NEXT_TAG="v0.0.1"
+            else
+              # Increment patch version
+              BASE=${LATEST_TAG#v}
+              MAJOR=$(echo "$BASE" | cut -d. -f1)
+              MINOR=$(echo "$BASE" | cut -d. -f2)
+              PATCH=$(echo "$BASE" | cut -d. -f3)
+              NEXT_TAG="v${MAJOR}.${MINOR}.$((PATCH + 1))"
+            fi
+
+            echo "Retiring current latest release as $NEXT_TAG"
+
+            # Get the commit SHA the latest release points to
+            LATEST_SHA=$(gh release view latest --json targetCommitish --jq '.targetCommitish')
+
+            # Download assets from current latest
+            mkdir -p /tmp/release-assets
+            gh release download latest --dir /tmp/release-assets || true
+
+            # Delete the old "latest" release and its tag
+            gh release delete latest --yes --cleanup-tag
+
+            # Create the retired versioned release at the same commit
+            ASSET_FLAGS=""
+            for f in /tmp/release-assets/*; do
+              [ -f "$f" ] && ASSET_FLAGS="$ASSET_FLAGS $f"
+            done
+
+            if [ -n "$ASSET_FLAGS" ]; then
+              gh release create "$NEXT_TAG" --target "$LATEST_SHA" --title "$NEXT_TAG" --notes "Retired from latest" $ASSET_FLAGS
+            else
+              gh release create "$NEXT_TAG" --target "$LATEST_SHA" --title "$NEXT_TAG" --notes "Retired from latest"
+            fi
+          fi
+
+      - name: Create latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create latest \
+            --target "${{ github.sha }}" \
+            --title "latest" \
+            --notes "Latest CV build from master" \
+            Igor_Berezin_CV.pdf

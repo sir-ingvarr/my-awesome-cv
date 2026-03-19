@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/sir-ingvarr/my-awesome-cv#readme",
   "devDependencies": {
-    "html-pdf": "^2.2.0"
+    "playwright": "^1.52.0"
   }
 }

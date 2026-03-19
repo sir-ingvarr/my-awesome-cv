@@ -1,39 +1,36 @@
-const fs = require('fs');
 const path = require('path');
-const pdf = require('html-pdf');
+const { chromium } = require('playwright');
 
-const assetsPath = path.join(__dirname, '..', 'assets');
-
-const options = {
-    format: 'A3',
-    orientation: 'portrait',
-    zoomFactor: 1,
-    renderDelay: 1500,
-    base: `file:///${assetsPath}`,
-    border: {
-        top: '1in',
-        right: '0.5in',
-        bottom: '0.5in',
-        left: '1in'
-    },
-};
+const OUTPUT_FILE = 'Igor_Berezin_CV.pdf';
 
 async function run() {
     try {
         const filePath = path.join(__dirname, '..', 'index.html');
-        const html = await fs.promises.readFile(filePath, 'utf8');
-        const pdfInstance = pdf.create(html, options);
-        const file = new Promise(resolve => {
-            pdfInstance.toFile('Igor_Berezin_CV.pdf', resolve);
+        const fileUrl = `file://${filePath}`;
+
+        const browser = await chromium.launch();
+        const page = await browser.newPage();
+
+        await page.goto(fileUrl, { waitUntil: 'networkidle' });
+
+        await page.pdf({
+            path: OUTPUT_FILE,
+            format: 'A3',
+            printBackground: true,
+            margin: {
+                top: '1in',
+                right: '0.5in',
+                bottom: '0.5in',
+                left: '1in',
+            },
         });
-        await file;
 
-
+        await browser.close();
+        console.log(`PDF generated: ${OUTPUT_FILE}`);
     } catch (e) {
         console.error(e.message);
         process.exit(1);
     }
-    process.exit(0);
 }
 
 run();
