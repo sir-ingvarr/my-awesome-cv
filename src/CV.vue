@@ -55,6 +55,14 @@ export default {
       return parseBody(htmlContent, this.lang);
     },
   },
+  watch: {
+    html: function () {
+      var self = this;
+      this.$nextTick(function () {
+        self._injectStyle();
+      });
+    },
+  },
   mounted() {
     this._injectStyle();
   },
