@@ -7,20 +7,17 @@
 import htmlContent from '!!raw-loader!../index.html';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import styleCSS from '!!raw-loader!../assets/style.css';
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import fontawesomeCSS from '!!raw-loader!../assets/fontawesome.min.css';
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import faSolidCSS from '!!raw-loader!../assets/fa-solid.min.css';
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import faBrandsCSS from '!!raw-loader!../assets/fa-brands.min.css';
 
 import photoUrl from '../assets/photo.jpg';
 
 function scopeCSS(css) {
-  // Strip html and body rule blocks entirely — they should not apply inside the component
   return css
-    .replace(/(^|\})(\s*)html\s*\{[^}]*\}/g, '$1')
-    .replace(/(^|\})(\s*)body\s*\{[^}]*\}/g, '$1');
+    // Rewrite html/body selectors to .cv-root
+    .replace(/(^|\})([\s]*)html\s*\{/g, '$1$2.cv-root {')
+    .replace(/(^|\})([\s]*)body\s*\{/g, '$1$2.cv-root {')
+    // Strip background-color declarations so host app background shows through
+    .replace(/background-color\s*:\s*var\(--bg-page\)\s*;?/g, '')
+    .replace(/background-color\s*:\s*var\(--bg-card\)\s*;?/g, '');
 }
 
 export default {
@@ -43,8 +40,7 @@ export default {
   mounted() {
     var style = document.createElement('style');
     style.setAttribute('data-cv-scoped', '');
-    style.textContent = [fontawesomeCSS, faSolidCSS, faBrandsCSS, scopeCSS(styleCSS)].join('\n')
-      + '\n.cv-root .underlay { background-color: transparent; }';
+    style.textContent = scopeCSS(styleCSS);
     this.$refs.root.appendChild(style);
     this._cvStyle = style;
   },
@@ -55,3 +51,9 @@ export default {
   },
 };
 </script>
+
+<style>
+@import '../assets/fontawesome.min.css';
+@import '../assets/fa-solid.min.css';
+@import '../assets/fa-brands.min.css';
+</style>
