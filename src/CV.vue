@@ -17,10 +17,10 @@ import faBrandsCSS from '!!raw-loader!../assets/fa-brands.min.css';
 import photoUrl from '../assets/photo.jpg';
 
 function scopeCSS(css) {
-  // Replace html/body selectors with the component root class
+  // Strip html and body rule blocks entirely — they should not apply inside the component
   return css
-    .replace(/(?:^|\}[\s]*)html\s*\{/g, function (m) { return m.replace('html', '.cv-root'); })
-    .replace(/(?:^|\}[\s]*)body\s*\{/g, function (m) { return m.replace('body', '.cv-root'); });
+    .replace(/(^|\})(\s*)html\s*\{[^}]*\}/g, '$1')
+    .replace(/(^|\})(\s*)body\s*\{[^}]*\}/g, '$1');
 }
 
 export default {
