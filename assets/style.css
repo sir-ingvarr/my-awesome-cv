@@ -277,7 +277,7 @@ b {
 
     .company-field,
     .edu-field {
-        flex-direction: column;
+        display: inline;
         line-height: 1.6;
     }
 
