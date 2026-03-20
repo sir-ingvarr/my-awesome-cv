@@ -217,6 +217,7 @@ hr {
 
 b {
     font-family: var(--font-bold);
+    font-weight: 900;
 }
 
 .blue {
