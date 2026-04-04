@@ -1,32 +1,39 @@
 const path = require('path');
 const { chromium } = require('playwright');
 
-const OUTPUT_FILE = 'Igor_Berezin_CV.pdf';
+const VARIANTS = [
+    { lang: 'en', output: 'Igor_Berezin_CV.pdf' },
+    { lang: 'ua', output: 'Igor_Berezin_CV_UA.pdf' },
+];
 
 async function run() {
     try {
         const filePath = path.join(__dirname, '..', 'index.html');
-        const fileUrl = `file://${filePath}`;
-
         const browser = await chromium.launch();
-        const page = await browser.newPage();
 
-        await page.goto(fileUrl, { waitUntil: 'networkidle' });
+        for (const variant of VARIANTS) {
+            const fileUrl = `file://${filePath}?lang=${variant.lang}`;
 
-        await page.pdf({
-            path: OUTPUT_FILE,
-            format: 'A3',
-            printBackground: true,
-            margin: {
-                top: '1in',
-                right: '0.5in',
-                bottom: '0.5in',
-                left: '1in',
-            },
-        });
+            const page = await browser.newPage();
+            await page.goto(fileUrl, { waitUntil: 'networkidle' });
+
+            await page.pdf({
+                path: variant.output,
+                format: 'A3',
+                printBackground: true,
+                margin: {
+                    top: '1in',
+                    right: '0.5in',
+                    bottom: '0.5in',
+                    left: '1in',
+                },
+            });
+
+            await page.close();
+            console.log(`PDF generated: ${variant.output}`);
+        }
 
         await browser.close();
-        console.log(`PDF generated: ${OUTPUT_FILE}`);
     } catch (e) {
         console.error(e.message);
         process.exit(1);

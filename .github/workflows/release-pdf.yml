@@ -84,4 +84,5 @@ jobs:
             --target "${{ github.sha }}" \
             --title "latest" \
             --notes "Latest CV build from master" \
-            Igor_Berezin_CV.pdf
+            Igor_Berezin_CV.pdf \
+            Igor_Berezin_CV_UA.pdf

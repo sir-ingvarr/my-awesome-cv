@@ -81,9 +81,14 @@ a {
   .page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     break-after: page;
     page-break-after: always;
-    padding: 20mm 10mm 20mm 20mm;
+    padding: 25mm 20mm 25mm 20mm;
+  }
+
+  .page-wrapper:last-child {
+    break-after: auto;
+    page-break-after: auto;
   }
 }

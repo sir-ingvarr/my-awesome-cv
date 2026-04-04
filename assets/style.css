@@ -217,6 +217,7 @@ hr {
 
 b {
     font-family: var(--font-bold);
+    font-weight: 900;
 }
 
 .blue {
@@ -277,7 +278,7 @@ b {
 
     .company-field,
     .edu-field {
-        flex-direction: column;
+        flex-wrap: wrap;
         line-height: 1.6;
     }
 
@@ -293,5 +294,31 @@ b {
     .photo {
         width: 160px;
         height: 160px;
+    }
+
+    body {
+        min-width: 0;
+        overflow-x: hidden;
+        font-size: 10pt;
+    }
+
+    .underlay {
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .upper-block {
+        flex-direction: column;
+        padding: 10px;
+        min-height: auto;
+    }
+
+    .margin-1,
+    .margin-2,
+    .margin-3 {
+        margin-left: 0;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

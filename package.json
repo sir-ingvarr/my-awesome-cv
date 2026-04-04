@@ -1,7 +1,7 @@
 {
   "name": "igor_berezin-cv",
   "version": "1.0.0",
-  "description": "this is a layouts set to be converted to pdf as my own cv.",
+  "description": "Igor Berezin working CV written in HTML to provide custom design implementation + vue component wrapper to be used on a personal website",
   "main": "index.html",
   "scripts": {
     "test": "echo \"No test required\" && exit 0",
@@ -17,7 +17,7 @@
     "JavaScript"
   ],
   "author": "Igor Berezin (igor.berezin@js-dev.pro)",
-  "license": "AGPL-3.0-or-later",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sir-ingvarr/my-awesome-cv/issues"
   },
