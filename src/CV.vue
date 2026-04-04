@@ -66,7 +66,7 @@ export default {
   mounted() {
     this._injectStyle();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this._removeStyle();
   },
   methods: {
